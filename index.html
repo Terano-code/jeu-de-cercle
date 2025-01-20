@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu des Cercles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            background-color: #000;
+            color: white;
+        }
+        #game-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 50px auto;
+            border: 2px solid white;
+            background-color: #222;
+        }
+        .circle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jeu des Cercles - Survolez pour marquer</h1>
+    <div id="game-container"></div>
+    <p>Score: <span id="score">0</span></p>
+    <script>
+        const gameContainer = document.getElementById('game-container');
+        let score = 0;
+
+        function createCircle() {
+            let circle = document.createElement('div');
+            circle.classList.add('circle');
+            circle.style.left = Math.random() * 350 + 'px';
+            circle.style.top = Math.random() * 350 + 'px';
+            circle.onmouseover = () => {
+                score++;
+                document.getElementById('score').textContent = score;
+                circle.remove();
+                createCircle();
+            };
+            gameContainer.appendChild(circle);
+        }
+
+        createCircle();
+    </script>
+</body>
+</html>
